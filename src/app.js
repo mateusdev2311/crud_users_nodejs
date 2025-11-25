@@ -1,5 +1,7 @@
-const express = require('express')
-const routes = require('./routes')
+import express from 'express'
+import routes from './routes'
+
+
 
 class App {
   constructor() {
@@ -15,5 +17,5 @@ class App {
     this.server.use(routes)
   }
 }
-const app = new App()
-module.exports = app.server
+
+export default new App().server

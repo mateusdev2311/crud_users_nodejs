@@ -1,6 +1,8 @@
-const { Router } = require('express')
-const routes = Router()
-const users = require('./app/controllers/UsersController.js')
+import { Router } from 'express'
+import users from './app/controllers/UsersController.js'
+
+const routes = new Router()
+
 //rotas de usuarios
 routes.get('/users', users.index)
 routes.get('/users/:id', users.show)
@@ -8,5 +10,4 @@ routes.post('/users', users.create)
 routes.put('/users/:id', users.update)
 routes.delete('/users/:id', users.destroy)
 
-
-module.exports = routes
+export default routes

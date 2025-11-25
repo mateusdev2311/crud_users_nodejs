@@ -72,4 +72,4 @@ class UsersController {
   }
 }
 
-module.exports = new UsersController()
+export default new UsersController()
