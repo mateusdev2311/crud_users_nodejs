@@ -9,17 +9,30 @@ class CustomersController {
 
   //Lista os usuarios
   async index(req, res) {
-    const data = await Customer.findAll()
-    return res.json(data)
+    try {
+      const data = await Customer.findAll()
+      const status = data ? 200 : 404
+
+      return res.status(status).json(data)
+    } catch (error) {
+      return res.status(500).json({
+        message: error.message
+      })
+    }
   }
 
 
   //Recupera um usuario
   show(req, res) {
-    const id = parseInt(req.params.id)
-    const user = custumers.find(user => user.id == id)
-    const status = user ? 200 : 404
-    return res.status(status).json(user)
+    try {
+      const id = parseInt(req.params.id)
+      const user = Customer.findOne({ where: { id } })
+      return res.json(user)
+    } catch (error) {
+      return res.status(500).json({
+        message: error.message
+      })
+    }
 
   }
   //Cria um usuario
