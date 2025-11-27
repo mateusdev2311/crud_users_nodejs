@@ -1,13 +1,13 @@
 import { Router } from 'express'
-import users from './app/controllers/UsersController.js'
+import customers from './app/controllers/CustomersController.js'
 
 const routes = new Router()
 
 //rotas de usuarios
-routes.get('/users', users.index)
-routes.get('/users/:id', users.show)
-routes.post('/users', users.create)
-routes.put('/users/:id', users.update)
-routes.delete('/users/:id', users.destroy)
+routes.get('/customers', customers.index)
+routes.get('/customers/:id', customers.show)
+routes.post('/customers', customers.create)
+routes.put('/customers/:id', customers.update)
+routes.delete('/customers/:id', customers.destroy)
 
 export default routes

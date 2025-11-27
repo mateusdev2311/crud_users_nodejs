@@ -1,18 +1,23 @@
-let users = [
+import Customer from "../models/Customer"
+
+let customers = [
   { id: 1, name: 'Mateus Costa', tipo: 'admin' },
   { id: 2, name: 'Gabriela Corrêa', tipo: 'user' },
   { id: 3, name: 'Pedro Henrique', tipo: 'user' },
 ]
-class UsersController {
+class CustomersController {
 
   //Lista os usuarios
-  index(req, res) {
-    return res.json(users)
+  async index(req, res) {
+    const data = await Customer.findAll()
+    return res.json(data)
   }
+
+
   //Recupera um usuario
   show(req, res) {
     const id = parseInt(req.params.id)
-    const user = users.find(user => user.id == id)
+    const user = custumers.find(user => user.id == id)
     const status = user ? 200 : 404
     return res.status(status).json(user)
 
@@ -20,10 +25,10 @@ class UsersController {
   //Cria um usuario
   create(req, res) {
     const { name, tipo } = req.body
-    const id = users[users.length - 1].id + 1
+    const id = customers[customers.length - 1].id + 1
 
     const user = { id, name, tipo }
-    users.push(user)
+    customers.push(user)
     return res.status(201).json({
       user,
       message: 'Usuario criado com sucesso'
@@ -35,13 +40,13 @@ class UsersController {
     const id = parseInt(req.params.id)
     const { name, tipo } = req.body
 
-    const user = users.findIndex(user => user.id == id)
+    const user = customers.findIndex(user => user.id == id)
     const status = user >= 0 ? 200 : 404
 
     if (user >= 0) {
-      users[user] = { id, name, tipo }
+      customers[user] = { id, name, tipo }
       return res.status(status).json({
-        user: users[user],
+        user: custumers[user],
         message: 'Usuario atualizado com sucesso'
       })
     } else {
@@ -55,11 +60,11 @@ class UsersController {
   //Deleta um usuario
   destroy(req, res) {
     const id = parseInt(req.params.id)
-    const user = users.findIndex(user => user.id == id)
+    const user = customers.findIndex(user => user.id == id)
     const status = user >= 0 ? 200 : 404
 
     if (user >= 0) {
-      users.splice(user, 1)
+      customers.splice(user, 1)
       return res.status(status).json({
         message: 'Usuario deletado com sucesso'
       })
@@ -72,4 +77,4 @@ class UsersController {
   }
 }
 
-export default new UsersController()
+export default new CustomersController()
